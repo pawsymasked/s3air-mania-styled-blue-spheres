@@ -37,21 +37,17 @@ function string SpheresModSupport.getEmeraldSprite(u8 sphereID, u8 sphereSize16)
 	// Determine whether sphereID is a chaos emerald or not
 	string emeraldType = (sphereID == 0x0b) ? "chaos" : "super"
 	
-#if GAMEAPP >= 0x21091200
-	u8 emeraldColor = emeraldColorID
 	// Replace Yellow Emerald with Orange, and Orange with Yellow, if the mod "Yellow Emerald" is active. Otherwise use the original position
 	if (MOD_YELLOW_EMERALD_ACTIVE)
 	{
 		if (emeraldColorID == 0x01)
-			emeraldColor = 0x07
+			emeraldColorID = 0x07
 		else if (emeraldColorID == 0x07)
-			emeraldColor = 0x01
-		emeraldColorID = emeraldColor
+			emeraldColorID = 0x01
 	}
 	
 	if (MOD_3D_SIDE_EMERALDS_ACTIVE)
 		emeraldType = "super"
-#endif 
 	
 	// Return sprite key
 	return stringformat("emerald_%s_0x%02x_size_%d", emeraldType, emeraldColorID, sphereSize16)

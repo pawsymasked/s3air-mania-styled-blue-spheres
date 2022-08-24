@@ -1,8 +1,12 @@
+#if SPHERES_MOD_SUPPORT_ACTIVE >= 0x1100
+
 // Defines
 include _defines/?
+
+// Utility
+include utility/?
 
 // General
 include general/?
 
-// Utility
-include utility/?
+#endif

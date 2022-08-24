@@ -5,37 +5,7 @@
 		"Author": "FadeInside" ,
 		"Description": "Stylizes special stages and Blue Sphere game, under the style of Sonic Mania. Replacing characters, spheres, HUD, and more with Sonic Mania. Don't forget to enable Classic style in the game options for a better look.",
 		"URL": "https://github.com/fadeinside/s3air-mania-styled-blue-spheres/",
-		"ModVersion": "v2.0",
-		"GameVersion": "21.09.28.0"
-	},
-	"Settings":
-	{
-		"List":
-		[
-			{
-				"Category": "Render",
-				"InternalName": "SETTING_BS_SHARP_GROUND",
-				"DisplayName": "Stage ground render:",
-				"Variable": "SETTING_BS_SHARP_GROUND",
-				"DefaultValue": "0",
-				"Options":
-				{
-					"0": "Smoothed (Default)",
-					"1": "Sharped"
-				}
-			},
-			{
-				"Category": "Render",
-				"InternalName": "SETTING_BS_PICKING_UP_MANIA",
-				"DisplayName": "Mania \"picking up\" rings:",
-				"Variable": "SETTING_BS_PICKING_UP_MANIA",
-				"DefaultValue": "1",
-				"Options":
-				{
-					"0": "Disable",
-					"1": "Enable (Default)"
-				}
-			}
-		]
+		"ModVersion": "v2.1 (Dev 2022.08.25)",
+		"GameVersion": "v22.08.13.0"
 	}
 }
