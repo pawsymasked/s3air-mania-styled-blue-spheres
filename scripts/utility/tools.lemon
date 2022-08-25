@@ -1,23 +1,10 @@
-//? Check the activity of mods and assign a value to globals.
-function void ManiaSpheres.modsCheck()
+// When enabled, spheres that are now behind the screen, or beyond the horizon, will not rendered.
+function bool SpheresModSupport.renderSpheresOptimize()
 {
-	// "Extra Slot Mighty" by iCloudius, check https://gamebanana.com/mods/336038
-	MOD_EXTRA_MIGHTY_ACTIVE = Mods.isModActive("Extra Slot Mighty")
-	// "Ultimate Mighty" by Sotaknuck, check https://gamebanana.com/mods/54268
-	MOD_ULTIMATE_MIGHTY_ACTIVE = Mods.isModActive("Ultimate Mighty")
-	// "Extra Slot Ray" by iCloudius, check https://gamebanana.com/mods/336038
-	MOD_EXTRA_RAY_ACTIVE = Mods.isModActive("Extra Slot Ray")
-	// "Ray the Flying Squirrel" by campbellsonic, https://gamebanana.com/mods/54261
-	MOD_CAMPBELL_RAY_ACTIVE = Mods.isModActive("Ray the Flying Squirrel")
-	// "Sonic 3D in 2D Ring Glow Effect" by GFX32, https://gamebanana.com/mods/360033
-	MOD_GFX32_RING_GLOW_ACTIVE = Mods.isModActive("Sonic 3D in 2D Ring Glow Effect")
-	// "Yellow Emerald" by Guthi, check https://gamebanana.com/mods/54326
-	MOD_YELLOW_EMERALD_ACTIVE = Mods.isModActive("Yellow Emerald")
-	// "3D Side View Chaos Emeralds" by Agnoristos, check https://gamebanana.com/mods/322550
-	MOD_3D_SIDE_EMERALDS_ACTIVE = Mods.isModActive("3D Side View Chaos Emeralds")
+	return true
 }
 
-//? Get the transparency value for some spheres during collecting.
+// Get the transparency value for some spheres during collecting.
 function u8 SpheresModSupport.getOnCollectedAlpha(u8 sphereID)
 {
 	// 0x0a is blue sphere and 0x0c is DAGE green sphere during collecting
@@ -28,17 +15,14 @@ function u8 SpheresModSupport.getOnCollectedAlpha(u8 sphereID)
 	return base.SpheresModSupport.getOnCollectedAlpha(sphereID)
 }
 
-//? Returns the emerald sprite key.
+// Returns the emerald sprite key.
 function string SpheresModSupport.getEmeraldSprite(u8 sphereID, u8 sphereSize16)
 {
 	// Use the stage number or algorithmic stage information to get the emerald color ID
 	u8 emeraldColorID = !(bluespheres.minigame_mode) ? global.next_bluespheres : (u8[0xffffffa4] & 0x07)
 	
-	// Determine whether sphereID is a chaos emerald or not
-	string emeraldType = (sphereID == 0x0b) ? "chaos" : "super"
-	
 	// Replace Yellow Emerald with Orange, and Orange with Yellow, if the mod "Yellow Emerald" is active. Otherwise use the original position
-	if (MOD_YELLOW_EMERALD_ACTIVE)
+	if (Mods.isModActive("Yellow Emerald"))
 	{
 		if (emeraldColorID == 0x01)
 			emeraldColorID = 0x07
@@ -46,14 +30,18 @@ function string SpheresModSupport.getEmeraldSprite(u8 sphereID, u8 sphereSize16)
 			emeraldColorID = 0x01
 	}
 	
-	if (MOD_3D_SIDE_EMERALDS_ACTIVE)
+	// Determine whether sphereID is a chaos emerald or not
+	string emeraldType = (sphereID == 0x0b) ? "chaos" : "super"
+	
+	// Use Super Emeralds sprites when active 3D Side View Chaos Emeralds mod
+	if (Mods.isModActive("3D Side View Chaos Emeralds"))
 		emeraldType = "super"
 	
 	// Return sprite key
 	return stringformat("emerald_%s_0x%02x_size_%d", emeraldType, emeraldColorID, sphereSize16)
 }
 
-//? Returns the ring transformation. The closer the ring is to the camera, the more "flattened" it becomes.
+// Returns the ring transformation. The closer the ring is to the camera, the more "flattened" it becomes.
 function u32 ManiaSpheres.get2DTransformRingCamera(u8 sphereSize16)
 {
 	if (sphereSize16 == 0x05)
@@ -72,7 +60,7 @@ function u32 ManiaSpheres.get2DTransformRingCamera(u8 sphereSize16)
 		return 0x00
 }
 
-//? Returns the Y-axis ring offset. The closer the ring is to the camera, the more it will be to the ground.
+// Returns the Y-axis ring offset. The closer the ring is to the camera, the more it will be to the ground.
 function u32 ManiaSpheres.getRepositionRingY(u8 sphereSize32)
 {
 	if (sphereSize32 >= 0x20)
