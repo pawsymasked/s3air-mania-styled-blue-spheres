@@ -2,6 +2,14 @@
 
 Follow the latest changes on GitHub: https://github.com/fadeinside/s3air-mania-styled-blue-spheres
 
+## Update v2.1 (2022.09.19) - Compatibility with the new version of AIR
+
+* Changes for compatibility with v22.08.13.0+ (Required v22.09.10.0+).
+* Sharp horizon sprites now matches the new sharp ground.
+* Removed old mod check system.
+* Removed mod Options.
+* Small fixes.
+
 ## Release v2.0 - The Release 2
 
 Mania-Styled Blue Spheres receives a new update in the form of a migration to the "Blue Spheres Sprite Mod Support" framework functionality and few improvements. -Fade
